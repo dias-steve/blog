@@ -1,6 +1,7 @@
 import React, {useState, useReducer} from 'react';
+import creatDataContext from '../context/creatDataContext';
 
-const BlogContext = React.createContext();
+
 const reducer = (state, action) => {
     switch(action.type){
         case 'change_more': 
@@ -11,20 +12,16 @@ const reducer = (state, action) => {
         
 }
 
+const addBlogPost = dispatch => {
+    return () => {dispatch({type: 'change_more'})};
+}
 
+// {addBlogPost} => Cela veut dire que nous passons la fonction
+// addBlogPost dans un objet 
+// => resultat de l'objet: {addblogPost: (dispatch) => {return () => ()}}
 
-export const BlogProvider = ({children}) => {
-    const blogPosts = [];
-    const [state, dispatch] = useReducer(reducer, blogPosts);
-    console.log(state);
-    
-    const addBlogPost = () => {
-        dispatch({type: 'change_more'})
-    }
-    return (
-    <BlogContext.Provider value = {{data: state, addBlogPost}}>
-        {children}
-    </BlogContext.Provider>);
-};
-
-export default BlogContext;
+export const {Context, Provider} = creatDataContext(
+    reducer,
+    {addBlogPost},
+    []
+    );
