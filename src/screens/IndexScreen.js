@@ -17,7 +17,7 @@ const IndexScreen = () => {
             }}
         />
         <Button
-            title = "plusss"
+            title = "Add icon"
             onPress= {() => (
                 console.log("+"),
                 addBlogPost()
