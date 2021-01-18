@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 import {Text, View, StyleSheet, Button, FlatList, TouchableOpacity} from 'react-native';
 import {Context} from '../context/BlogContext';
 import { SimpleLineIcons } from '@expo/vector-icons';
+import {withNavigation} from 'react-navigation';
 
-const IndexScreen = () => {
+const IndexScreen = ({navigation}) => {
 
     const {state, addBlogPost, deleteBlogPost} = useContext(Context);
     console.log(`>> state:`, state)
@@ -20,12 +21,23 @@ const IndexScreen = () => {
             keyExtractor = {data => data.id}
             data = {state}
             renderItem = {({item}) => {
-                return (<View style= {styles.itemlist}><Text> {item.title} - {item.id} </Text> 
-                <TouchableOpacity
-                    onPress = {() =>( 
-                        deleteBlogPost(item.id),
-                        console.log(item.id))}
-                    >
+                return (<View style= {styles.itemlist}>
+                    <TouchableOpacity
+                        onPress = {
+                          () => ( 
+                                console.log("blog detail de ", item.id),
+                                navigation.navigate('Detail',{id: item.id})
+                                )  
+                        }
+                        >
+                        <Text> {item.title} - {item.id} </Text>
+
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress = {() =>( 
+                            deleteBlogPost(item.id),
+                            console.log(item.id))}
+                        >
                 <SimpleLineIcons name="trash" size={24} color="black" />
                 </TouchableOpacity>
                 </View>
@@ -54,4 +66,4 @@ const styles = StyleSheet.create({
  
 
 });
-export default IndexScreen;
+export default withNavigation(IndexScreen);
