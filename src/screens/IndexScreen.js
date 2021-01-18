@@ -7,7 +7,13 @@ const IndexScreen = () => {
     const {state, addBlogPost} = useContext(Context);
     console.log(`>>${state}`)
     return <View>
-        
+            <Button
+            title = "Add blog"
+            onPress= {() => (
+                console.log("+"),
+                addBlogPost()
+            )}
+            />
         <Text>IndexScreen </Text>
         <FlatList
             keyExtractor = {data => data.title}
@@ -16,17 +22,12 @@ const IndexScreen = () => {
                 return <Text> {item.title} </Text>
             }}
         />
-        <Button
-            title = "Add icon"
-            onPress= {() => (
-                console.log("+"),
-                addBlogPost()
-            )}
-            />
+    
     </View>
 };
 
 const styles = StyleSheet.create({
+
 
 });
 export default IndexScreen;
