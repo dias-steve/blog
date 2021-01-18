@@ -14,7 +14,7 @@ const IndexScreen = () => {
                 addBlogPost()
             )}
             />
-        <Text>IndexScreen </Text>
+      
         <FlatList
             keyExtractor = {data => data.title}
             data = {state}
