@@ -1,14 +1,16 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, View, TextInput, StyleSheet, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Value } from 'react-native-reanimated';
+import { Context } from '../context/BlogContext';
+import { withNavigation } from 'react-navigation';
 
 
 const CreatingBlogScreen = ({ navigation }) => {
 
     const [titleBlog, setTitleBlog] = useState('');
     const [descriptionBlog, setDescription] = useState('');
+    const {addBlogPost} = useContext(Context);
 
     return (
         <View style={styles.viewContainer}>
@@ -45,7 +47,16 @@ const CreatingBlogScreen = ({ navigation }) => {
                         />
                     </View>
                     <TouchableOpacity
-                        onPress = {()=> (console.log('ok post'))}
+                        onPress = {()=> (
+                            console.log('ok post'),
+                            addBlogPost(
+                                titleBlog, 
+                                descriptionBlog, 
+                                () => {console.log('callback');
+                                    navigation.navigate('Index');
+                            })
+                                
+                            )}
                     >
                         <View style={styles.button}>
                             <Text style={styles.textButton}>Add</Text>
@@ -129,4 +140,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default CreatingBlogScreen;
+export default withNavigation(CreatingBlogScreen);

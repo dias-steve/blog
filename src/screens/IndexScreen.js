@@ -64,7 +64,7 @@ const IndexScreen = ({ navigation }) => {
             <TouchableOpacity
                 onPress={() => (
                     console.log("+"),
-                    addBlogPost()
+                    navigation.navigate('Creating')
                 )}
                 style = {styles.touchablebutton}
             >

@@ -4,9 +4,10 @@ import creatDataContext from '../context/creatDataContext';
 
 const reducer = (state, action) => {
     switch(action.type){
-        case 'change_more': 
+        case 'addBlog': 
+            console.log("add", action);
             return [...state,{id: Math.floor(Math.random()*9999),
-                title:`BlogPost#${state.length+1}`}];
+                title:action.payload.title}];
         case 'delete_blog':
             console.log("obj", action)
             return state.filter((blogpost)=> blogpost.id !== action.payload);
@@ -17,7 +18,10 @@ const reducer = (state, action) => {
 }
 
 const addBlogPost = dispatch => {
-    return () => {dispatch({type: 'change_more'})};
+    return (titleBlog,descriptionBlog, callBack) => {
+        console.log('on add blog', titleBlog),
+        dispatch({type: 'addBlog', payload: {title: titleBlog, description: descriptionBlog}})};
+        callBack();
 };
 
 const deleteBlogPost = (dispatch) => {
