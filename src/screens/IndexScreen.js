@@ -82,6 +82,20 @@ const IndexScreen = ({ navigation }) => {
     </View>
 };
 
+IndexScreen.navigationOptions = ({navigation}) => {
+    return {
+        headerRight: (
+            <TouchableOpacity 
+                onPress = {()=> (
+                    navigation.navigate('Creating')
+                )}
+            >
+                <Feather name="plus" size={30} style = {{marginLeft: 10 }}/>
+            </TouchableOpacity>
+            )
+    };
+};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
